@@ -19,6 +19,13 @@ def test_health():
     assert reponse.get_json()["status"] == "ok"
 
 
+# La route health renvoie bien la version attendue
+def test_version():
+    reponse = client.get("/health")
+    assert reponse.status_code == 200
+    assert reponse.get_json()["version"] == "1.0"
+
+
 # La liste contient au moins les deux notes d'exemple
 def test_liste_notes():
     reponse = client.get("/notes")
@@ -35,15 +42,7 @@ def test_recherche_etudiant():
 if __name__ == "__main__":
     test_accueil()
     test_health()
-    test_liste_notes()
-    test_recherche_etudiant()
-    print("Tous les tests passent avec succès !")
-
-
-
-if __name__ == "__main__":
-    test_accueil()
-    test_health()
+    test_version()
     test_liste_notes()
     test_recherche_etudiant()
     print("Tous les tests passent avec succès !")
